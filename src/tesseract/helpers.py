@@ -1,3 +1,6 @@
+from pathlib import Path
+from typing import Union
+
 import cv2
 import numpy as np
 
@@ -47,6 +50,11 @@ def deskew(image):
     return rotated
 
 
-# template matching
 def match_template(image, template):
     return cv2.matchTemplate(image, template, cv2.TM_CCOEFF_NORMED)
+
+
+def read_image(path: Union[str, Path]):
+    if isinstance(path, Path):
+        path = path.__str__()
+    return cv2.imread(path)
